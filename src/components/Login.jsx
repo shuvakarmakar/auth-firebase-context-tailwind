@@ -4,7 +4,7 @@ import { AuthContext } from '../providers/AuthProviders';
 
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
     console.log(signIn)
 
     const handleLogin = event => {
@@ -23,6 +23,15 @@ const Login = () => {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    const handleLoginWithGoogle = () =>{
+        signInWithGoogle()
+        .then((result) => {
+            const user = result.user;
+          }).catch((error) => {
+            console.log(error);
+          });
     }
 
     return (
@@ -53,6 +62,7 @@ const Login = () => {
                                 <button className="btn btn-primary">Login</button>
                             </div>
                         </Form>
+                        <button onClick={handleLoginWithGoogle} className="btn btn-primary">Sign In With Google</button>
                     </div>
                 </div>
             </div>
